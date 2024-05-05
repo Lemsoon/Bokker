@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Input } from "./Input";
+import { BookContext } from "../context/BookContext";
 
 export const Search = () => {
-  const [activeSearchMode, setActiveSearchMode] = useState<boolean>(false);
-
+  const [activeSearchMode, setActiveSearchMode] = useState<boolean>(true);
   const toggleSearchMode = (searchMode: boolean) => setActiveSearchMode(searchMode);
+  const { setSearchTerm, searchTerm } = useContext(BookContext);
+  const searchTermRef = useRef<HTMLInputElement>(null);
 
-  const doSearch = () => {};
+  const doSearch = () => {
+    if (!searchTermRef) return;
+    setSearchTerm(searchTermRef.current?.value!);
+    window.location.href = "/search";
+  };
+
+  useEffect(() => {
+    console.log(searchTerm);
+  }, [searchTerm]);
 
   return (
     <div className="w-60 mr-16">
@@ -22,10 +32,12 @@ export const Search = () => {
       >
         Author
       </button>
+
       <div className="flex ">
         <Input
           className=" h-12 border-black border-[.1rem] rounded-full bg-white text-[16px]"
           placeholder="Search for a book..."
+          ref={searchTermRef}
         />
         <button className="border-2 border-black" onClick={() => doSearch()}>
           search

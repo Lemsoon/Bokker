@@ -5,8 +5,8 @@ type ContextProps = {
   children: ReactNode;
 };
 
-export const temp = ({ children }: ContextProps) => {
+export const BookProvider = ({ children }: ContextProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  return <BookContext.Provider value={setSearchTerm}>{children}</BookContext.Provider>;
+  return <BookContext.Provider value={{ setSearchTerm, searchTerm }}>{children}</BookContext.Provider>;
 };

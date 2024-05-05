@@ -2,10 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Root } from "./Routes/Root.tsx";
 import "./index.css";
+import { BookProvider } from "./context/ContextProvider.tsx";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ErrorPage } from "./Routes/ErrorPage.tsx";
 import { Home } from "./Routes/Home.tsx";
+import { SearchPage } from "./Routes/SearchPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,12 +20,18 @@ const router = createBrowserRouter([
         element: <Home />,
         errorElement: <>Error loading home page</>,
       },
+      {
+        path: "/search",
+        element: <SearchPage />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BookProvider>
+      <RouterProvider router={router} />
+    </BookProvider>
   </React.StrictMode>
 );
