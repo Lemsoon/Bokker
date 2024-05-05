@@ -1,4 +1,5 @@
 import { Input } from "./Input";
+import { Search } from "./Search";
 
 export const Header = () => {
   return (
@@ -64,10 +65,7 @@ export const Header = () => {
           FAVORITE AUTHORS
         </a>
       </div>
-      <Input
-        className="mr-16 w-[20vw] h-12 border-black border-[.1rem] rounded-full bg-white text-xl"
-        placeholder="Search for a book..."
-      />
+      <Search />
     </div>
   );
 };
