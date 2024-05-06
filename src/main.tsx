@@ -23,6 +23,17 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchPage />,
+        errorElement: <>Error Loading Search Page</>,
+      },
+      {
+        path: "/favorite_books",
+        element: <></>,
+        errorElement: <>Error Loading Search Page</>,
+      },
+      {
+        path: "/favorite_authors",
+        element: <></>,
+        errorElement: <>Error Loading Search Page</>,
       },
     ],
   },

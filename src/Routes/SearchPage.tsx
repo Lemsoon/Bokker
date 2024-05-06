@@ -6,6 +6,9 @@ export const SearchPage = () => {
   const { searchTerm } = useContext(BookContext);
   const searchResult = useFetch(`https://openlibrary.org/search.json?title=${searchTerm}&limit=10`);
 
+  useEffect(() => {
+    console.log(searchResult);
+  }, [searchResult]);
   return (
     <div className="border-2 border-black w-[100%]">
       {searchResult ? (
@@ -16,7 +19,11 @@ export const SearchPage = () => {
             className=" border-2 border-black m-6 flex min-h-60 hover:scale-[1.01] duration-100 cursor-pointer"
           >
             <img
-              src={book.oclc ? `https://covers.openlibrary.org/b/oclc/${book.oclc[0]}-M.jpg` : "Cover not found"}
+              src={
+                book.cover_edition_key
+                  ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg`
+                  : "Cover not found"
+              }
               alt="Book cover"
               className="w-44 object-contain"
             />
