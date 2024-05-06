@@ -3,7 +3,7 @@ import { Search } from "./Search";
 export const Header = () => {
   return (
     <div className="w-screen h-28 border-b-[.2rem] border-black flex justify-between items-center">
-      <div className="ml-16 w-32">
+      <a className="ml-16 w-32" href="/">
         <svg
           className="w-20 h-20"
           xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ export const Header = () => {
             />
           </g>
         </svg>
-      </div>
+      </a>
       <div className="text-3xl flex space-x-24  w-[60vw] justify-center gap-40">
         <a href="/" className="hover:scale-110 duration-150">
           HOME
