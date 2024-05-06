@@ -38,14 +38,19 @@ export const Carousel = ({ inputArray, loadingText, jumpAmount, instantScroll }:
             <BiRightArrow />
           </button>
 
-          {inputArray.works.map((book: any, i: number) => {
+          {(inputArray.works || inputArray.docs).map((book: any, i: number) => {
             return (
-              <img
-                key={i}
-                src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg`}
-                alt="Trending Book Cover"
-                className="max-h-[22rem] border-2 border-black "
-              />
+              <div className="relative group">
+                <img
+                  key={i}
+                  src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg`}
+                  alt={`${book.title} cover`}
+                  className="max-h-[22rem] min-h-[22rem] min-w-56 border-2 border-black"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center duration-200">
+                  <p className="text-white text-lg">{book.title}</p>
+                </div>
+              </div>
             );
           })}
         </div>
