@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom/client";
 import { Root } from "./Routes/Root.tsx";
 import "./index.css";
 import { BookProvider } from "./context/ContextProvider.tsx";
-
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ErrorPage } from "./Routes/ErrorPage.tsx";
 import { Home } from "./Routes/Home.tsx";
 import { SearchPage } from "./Routes/SearchPage.tsx";
+import { BookPage } from "./Routes/BookPage.tsx";
+import { BookContext } from "./context/BookContext.ts";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
         path: "/search",
         element: <SearchPage />,
         errorElement: <>Error Loading Search Page</>,
+      },
+      {
+        path: `/book/works/:bookId`,
+        element: <BookPage />,
+        errorElement: <>Error loading book page</>,
       },
       {
         path: "/favorite_books",

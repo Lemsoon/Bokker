@@ -7,6 +7,11 @@ type ContextProps = {
 
 export const BookProvider = ({ children }: ContextProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [currentBook, setCurrentBook] = useState<string>("");
 
-  return <BookContext.Provider value={{ setSearchTerm, searchTerm }}>{children}</BookContext.Provider>;
+  return (
+    <BookContext.Provider value={{ setSearchTerm, searchTerm, currentBook, setCurrentBook }}>
+      {children}
+    </BookContext.Provider>
+  );
 };
