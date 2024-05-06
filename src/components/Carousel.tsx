@@ -12,33 +12,31 @@ export const Carousel = ({ inputArray, loadingText, jumpAmount, instantScroll }:
   const windowRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="h-full flex justify-center items-center">
+    <div className="h-full flex justify-center items-center relative">
       {inputArray ? (
-        <div className="flex overflow-x-hidden gap-2" ref={windowRef}>
-          <div className="fixed flex w-full gap-[75%]">
-            <button
-              onClick={() => {
-                windowRef.current!.scrollTo({
-                  left: windowRef.current!.scrollLeft - jumpAmount,
-                  behavior: instantScroll ? "instant" : "smooth",
-                });
-              }}
-              className="bg-white w-8 h-8 flex items-center justify-center rounded-full text-black"
-            >
-              <BiLeftArrow />
-            </button>
-            <button
-              onClick={() => {
-                windowRef.current!.scrollTo({
-                  left: windowRef.current!.scrollLeft + jumpAmount,
-                  behavior: instantScroll ? "instant" : "smooth",
-                });
-              }}
-              className="bg-white w-8 h-8 flex items-center justify-center rounded-full text-black"
-            >
-              <BiRightArrow />
-            </button>
-          </div>
+        <div className="flex overflow-x-hidden gap-2 h-full items-center" ref={windowRef}>
+          <button
+            onClick={() => {
+              windowRef.current!.scrollTo({
+                left: windowRef.current!.scrollLeft - jumpAmount,
+                behavior: instantScroll ? "instant" : "smooth",
+              });
+            }}
+            className="bg-white w-8 h-8 flex items-center justify-center rounded-full text-black absolute left-0 top-0 bottom-0 mt-auto mb-auto ml-2"
+          >
+            <BiLeftArrow />
+          </button>
+          <button
+            onClick={() => {
+              windowRef.current!.scrollTo({
+                left: windowRef.current!.scrollLeft + jumpAmount,
+                behavior: instantScroll ? "instant" : "smooth",
+              });
+            }}
+            className="bg-white w-8 h-8 flex items-center justify-center rounded-full text-black absolute right-0 top-0 bottom-0 mt-auto mb-auto mr-2"
+          >
+            <BiRightArrow />
+          </button>
 
           {inputArray.works.map((book: any, i: number) => {
             return (
