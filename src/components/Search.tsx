@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Input } from "./Input";
 import { BookContext } from "../context/BookContext";
+import { Link, redirect } from "react-router-dom";
 
 export const Search = () => {
   const [activeSearchMode, setActiveSearchMode] = useState<boolean>(true);
@@ -11,7 +12,7 @@ export const Search = () => {
   const doSearch = () => {
     if (!searchTermRef) return;
     setSearchTerm(searchTermRef.current?.value!);
-    window.location.href = "/search";
+    redirect("/search");
   };
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export const Search = () => {
           ref={searchTermRef}
         />
         <button className="border-2 border-black" onClick={() => doSearch()}>
-          search
+          <Link to="/search">search</Link>
         </button>
       </div>
     </div>
