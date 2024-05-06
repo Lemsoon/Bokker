@@ -23,7 +23,7 @@ export const Home = () => {
           <Carousel
             loadingText="Getting trending books..."
             inputArray={trendingBooks}
-            jumpAmount={1200}
+            jumpAmount={1350}
             instantScroll={false}
           />
         </div>
@@ -34,7 +34,7 @@ export const Home = () => {
           <Carousel
             loadingText="Getting trending books..."
             inputArray={classicBooks}
-            jumpAmount={1200}
+            jumpAmount={1350}
             instantScroll={false}
           />
         </div>

@@ -43,9 +43,8 @@ export const Carousel = ({ inputArray, loadingText, jumpAmount, instantScroll }:
 
           {(inputArray.works || inputArray.docs).map((book: any, i: number) => {
             return (
-              <div className="relative group">
+              <div key={i} className="relative group">
                 <img
-                  key={i}
                   src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg`}
                   alt={`${book.title} cover`}
                   className="max-h-[22rem] min-h-[22rem] min-w-56 border-2 border-black"
