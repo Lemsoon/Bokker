@@ -1,6 +1,5 @@
 import { Carousel } from "@/components/Carousel";
 import { useFetch } from "@/hooks/useFetch";
-import { useEffect } from "react";
 
 export const Home = () => {
   const getTrending = () => {
@@ -12,12 +11,10 @@ export const Home = () => {
 
   const trendingBooks: any = getTrending();
   const classicBooks: any = getClassic();
-  console.log(trendingBooks);
-  console.log(classicBooks);
 
   return (
     <div className="h-[100%]">
-      <div className=" h-[50%] tracking-wide">
+      <div className=" h-[40vh] tracking-wide">
         <h1 className="text-4xl ">Trending Books</h1>
         <div className="w-[100%] h-[90%] border-black border-2">
           <Carousel
@@ -28,9 +25,9 @@ export const Home = () => {
           />
         </div>
       </div>
-      <div className=" h-[50%] ">
+      <div className=" h-[40vh] ">
         <h1 className="text-4xl tracking-wide">Classic Books</h1>
-        <div className="w-[100%] h-[90%] border-black border-2">
+        <div className="w-[100%] h-[100%] border-black border-2">
           <Carousel
             loadingText="Getting trending books..."
             inputArray={classicBooks}

@@ -15,10 +15,6 @@ export const Search = () => {
     redirect("/search");
   };
 
-  useEffect(() => {
-    console.log(searchTerm);
-  }, [searchTerm]);
-
   return (
     <div className="w-60 mr-16">
       <button
