@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import { Search } from "./Search";
 
 export const Header = () => {
   return (
     <div className="w-screen h-28 border-b-[.2rem] border-black flex justify-between items-center">
-      <a className="ml-16 w-32" href="/">
+      <Link to="/" className="ml-16 w-32">
         <svg
           className="w-20 h-20"
           xmlns="http://www.w3.org/2000/svg"
@@ -52,17 +53,17 @@ export const Header = () => {
             />
           </g>
         </svg>
-      </a>
+      </Link>
       <div className="text-3xl flex space-x-24  w-[60vw] justify-center gap-40">
-        <a href="/" className="hover:scale-110 duration-150">
+        <Link to="/" className="hover:scale-110 duration-150">
           HOME
-        </a>
-        <a href="/favorite_books" className="hover:scale-110 duration-150">
+        </Link>
+        <Link to="/favorite_books" className="hover:scale-110 duration-150">
           FAVORITE BOOKS
-        </a>
-        <a href="/favorite_authors" className="hover:scale-110 duration-150">
+        </Link>
+        <Link to="/favorite_authors" className="hover:scale-110 duration-150">
           FAVORITE AUTHORS
-        </a>
+        </Link>
       </div>
       <Search />
     </div>

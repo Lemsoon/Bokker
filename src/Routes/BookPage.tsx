@@ -1,7 +1,10 @@
+import { BookContext } from "@/context/BookContext";
 import { useFetch } from "@/hooks/useFetch";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 export const BookPage = () => {
+  const { dispatch } = useContext(BookContext);
   const params = useParams();
   const bookId = params.bookId;
 
@@ -71,6 +74,12 @@ export const BookPage = () => {
       ) : (
         "Data loading..."
       )}
+      <button
+        className="border-2 border-black bg-red-200 hover:bg-red-500"
+        onClick={() => dispatch({ type: "addToFav", payload: bookData.key })}
+      >
+        Add to favorite
+      </button>
     </div>
   );
 };

@@ -5,6 +5,7 @@ export const BookContext = createContext<{
   setCurrentBook: (value: string) => void;
   setTrendingBooks: (value: []) => void;
   setClassicBooks: (value: []) => void;
+  dispatch: (value: any) => void;
   searchTerm: string;
   currentBook: string;
   trendingBooks: [];
@@ -14,6 +15,7 @@ export const BookContext = createContext<{
   setCurrentBook: () => {},
   setClassicBooks: () => {},
   setTrendingBooks: () => {},
+  dispatch: () => {},
   searchTerm: "",
   currentBook: "",
   trendingBooks: [],
