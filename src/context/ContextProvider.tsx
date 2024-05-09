@@ -1,11 +1,17 @@
 import { ReactNode, useEffect, useReducer, useState } from "react";
-import { BookContext } from "./BookContext";
+import { BookContext, FavoriteBookType } from "./BookContext";
+import { AxiosHookLess } from "@/utils/AxiosHookLess";
 
 type ContextProps = {
   children: ReactNode;
 };
 
-const reducer = (state: any, action: any) => {
+type Action = {
+  type: string;
+  payload: string;
+};
+
+const reducer = (state: any, action: Action) => {
   switch (action.type) {
     case "addToFav":
       return { favoriteBooks: [...state.favoriteBooks, action.payload] };
@@ -21,11 +27,20 @@ export const BookProvider = ({ children }: ContextProps) => {
   const [currentBook, setCurrentBook] = useState<string>("");
   const [trendingBooks, setTrendingBooks] = useState<[]>([]);
   const [classicBooks, setClassicBooks] = useState<[]>([]);
+  const [favoriteBooksInfo, setFavoriteBooksInfo] = useState<FavoriteBookType[]>([]);
 
-  const [books, dispatch] = useReducer(reducer, { favoriteBooks: [] });
+  const [state, dispatch] = useReducer(reducer, { favoriteBooks: [] });
+
   useEffect(() => {
-    console.log(books);
-  }, [books.favoriteBooks]);
+    const fetchData = async () => {
+      const latestBookData = await AxiosHookLess(
+        //Had to create a seperate api thing so that there are not too many nested hooks
+        `https://openlibrary.org${state.favoriteBooks[state.favoriteBooks.length - 1]}.json`
+      );
+      setFavoriteBooksInfo([...favoriteBooksInfo, latestBookData.data]);
+    };
+    fetchData();
+  }, [state.favoriteBooks]);
 
   return (
     <BookContext.Provider
@@ -39,6 +54,8 @@ export const BookProvider = ({ children }: ContextProps) => {
         classicBooks,
         setClassicBooks,
         dispatch,
+        state,
+        favoriteBooksInfo,
       }}
     >
       {children}
