@@ -12,7 +12,6 @@ export const BookPage = () => {
   const ratingData = useFetch(`https://openlibrary.org/works/${bookId}/ratings.json`);
   const authorKey = bookData && bookData.authors[0].author.key;
   const authorData = useFetch(`https://openlibrary.org${authorKey}.json`);
-  console.log("Book Data: ", bookData);
 
   return (
     <div>
