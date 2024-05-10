@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
 export type FavoriteBookType = {
+  covers: string[];
   title: string;
   avgRating: number;
   key: string;
