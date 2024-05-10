@@ -1,10 +1,11 @@
 import { BookContext } from "@/context/BookContext";
 import { useFetch } from "@/hooks/useFetch";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export const BookPage = () => {
-  const { dispatch } = useContext(BookContext);
+  const { dispatch, state } = useContext(BookContext);
+
   const params = useParams();
   const bookId = params.bookId;
 
@@ -13,9 +14,25 @@ export const BookPage = () => {
   const authorKey = bookData && bookData.authors[0].author.key;
   const authorData = useFetch(`https://openlibrary.org${authorKey}.json`);
 
+  const [isFav, setIsFav] = useState<boolean>();
+
+  const favClicked = (favAction: string) => {
+    setIsFav(!isFav);
+    const favBookInfo = {
+      title: bookData.title,
+      cover: bookData.covers ? bookData.covers[0] : null,
+      key: bookData.key,
+    };
+    dispatch({ type: favAction, payload: favBookInfo });
+  };
+
+  useEffect(() => {
+    setIsFav(bookData && state.favoriteBooks.some((book) => book.key.includes(bookData.key)));
+  }, [authorKey]);
+
   return (
     <div>
-      {bookData ? (
+      {bookData && ratingData ? (
         <div className="flex">
           <img
             src={bookData.covers ? `https://covers.openlibrary.org/b/id/${bookData.covers[0]}-M.jpg` : ""}
@@ -23,7 +40,7 @@ export const BookPage = () => {
             className="min-w-72 max-w-72 h-full border-2 border-black"
           />
           <div id="left-side" className="ml-6 flex flex-col gap-5 border-2 border-black p-2 w-full">
-            <div id="title_&_author">
+            <div id="title_&_author_rating">
               <h1 className="font-bold text-3xl">
                 {bookData.title}
                 {bookData.subtitle ? ": " + bookData.subtitle : ""}
@@ -31,6 +48,10 @@ export const BookPage = () => {
               <h2>
                 <strong>Written by:</strong> {authorData ? authorData.name : <>Missing Author</>}
               </h2>
+              <h3 className="text-xs">
+                <strong>Average Rating:</strong>{" "}
+                {ratingData.summary.average ? ratingData.summary.average.toFixed(1) : <>No rating data to show</>}
+              </h3>
             </div>
             <div>
               <h1 className="font-bold text-2xl m-0 underline">About this book</h1>
@@ -75,9 +96,11 @@ export const BookPage = () => {
       )}
       <button
         className="border-2 border-black bg-red-200 hover:bg-red-500"
-        onClick={() => dispatch({ type: "addToFav", payload: bookData.key })}
+        onClick={() => {
+          favClicked(isFav ? "removeFromFav" : "addToFav");
+        }}
       >
-        Add to favorite
+        {isFav ? "Remove from favorites" : "Add to favorites"}
       </button>
     </div>
   );
