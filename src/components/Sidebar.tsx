@@ -11,11 +11,11 @@ export const Sidebar = () => {
       {state.favoriteBooks.length === 0 ? (
         <p className="font-l italic tracking-widest text-center pt-3">You have not added any favorite books yet</p>
       ) : (
-        <ul className="text-center ">
+        <ul className="text-center duration-200">
           {state.favoriteBooks.map((book, i) => {
             return (
               <Link key={i} to={`/book${book.key}`}>
-                <li className="bg-red-100 m-2">
+                <li className="h-6 pb-6 bg-red-100 m-2 border-2 border-black hover:scale-[104%] duration-75">
                   <p>{book.title}</p>
                 </li>
               </Link>

@@ -1,5 +1,17 @@
 import { createContext } from "react";
 
+export type BookType = {
+  title: string;
+  key: string[];
+  cover?: string;
+  author: string;
+  read: boolean;
+};
+
+export type favoriteBooksType = {
+  favoriteBooks: BookType[];
+};
+
 export const BookContext = createContext<{
   setSearchTerm: (value: string) => void;
   setCurrentBook: (value: string) => void;
@@ -10,7 +22,7 @@ export const BookContext = createContext<{
   currentBook: string;
   trendingBooks: [];
   classicBooks: [];
-  state: { favoriteBooks: { title: string; cover?: string; key: string }[] };
+  state: favoriteBooksType;
 }>({
   setSearchTerm: () => {},
   setCurrentBook: () => {},
@@ -21,5 +33,7 @@ export const BookContext = createContext<{
   currentBook: "",
   trendingBooks: [],
   classicBooks: [],
-  state: { favoriteBooks: [] },
+  state: {
+    favoriteBooks: [],
+  },
 });

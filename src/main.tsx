@@ -8,7 +8,7 @@ import { ErrorPage } from "./Routes/ErrorPage.tsx";
 import { Home } from "./Routes/Home.tsx";
 import { SearchPage } from "./Routes/SearchPage.tsx";
 import { BookPage } from "./Routes/BookPage.tsx";
-import { BookContext } from "./context/BookContext.ts";
+import { FavoriteBooks } from "./Routes/FavoriteBooks.tsx";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchPage />,
-        errorElement: <>Error Loading Search Page</>,
+        errorElement: <>Error loading Search Page</>,
       },
       {
         path: `/book/works/:bookId`,
@@ -33,13 +33,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/favorite_books",
-        element: <></>,
-        errorElement: <>Error Loading Search Page</>,
+        element: <FavoriteBooks></FavoriteBooks>,
+        errorElement: <>Error loading favorites Page</>,
       },
       {
         path: "/favorite_authors",
         element: <></>,
-        errorElement: <>Error Loading Search Page</>,
+        errorElement: <>Error loading authors Page</>,
       },
     ],
   },

@@ -16,7 +16,7 @@ export const Search = () => {
   };
 
   return (
-    <div className="w-60 mr-16">
+    <div className="w-96 mr-16">
       <button
         onClick={() => toggleSearchMode(true)}
         className={activeSearchMode ? "border-black border-2 w-16" : " border-none w-16"}

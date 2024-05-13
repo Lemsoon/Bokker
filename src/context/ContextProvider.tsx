@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useReducer, useState } from "react";
-import { BookContext } from "./BookContext";
+import { BookContext, BookType } from "./BookContext";
 
 type ContextProps = {
   children: ReactNode;
@@ -21,6 +21,20 @@ const reducer = (state: any, action: Action) => {
       console.log("Removing fav: ", action.payload.key);
       return {
         favoriteBooks: state.favoriteBooks.filter((book: any) => book.key !== action.payload.key),
+      };
+    case "setRead":
+      console.log("Marking as read: ", action.payload.key);
+      return {
+        favoriteBooks: state.favoriteBooks.map((book: any) =>
+          book.key === action.payload.key ? { ...book, read: true } : book
+        ),
+      };
+    case "setNotRead":
+      console.log("Marking as not read: ", action.payload.key);
+      return {
+        favoriteBooks: state.favoriteBooks.map((book: any) =>
+          book.key === action.payload.key ? { ...book, read: false } : book
+        ),
       };
     default:
       return state;

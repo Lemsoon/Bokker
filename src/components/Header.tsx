@@ -54,7 +54,7 @@ export const Header = () => {
           </g>
         </svg>
       </Link>
-      <div className="text-3xl flex space-x-24  w-[60vw] justify-center gap-40">
+      <div className="text-3xl flex space-x-24  w-full justify-center gap-32 ">
         <Link to="/" className="hover:scale-110 duration-150">
           HOME
         </Link>
@@ -62,7 +62,7 @@ export const Header = () => {
           FAVORITE BOOKS
         </Link>
         <Link to="/favorite_authors" className="hover:scale-110 duration-150">
-          FAVORITE AUTHORS
+          FAVORITE AUTHORS W.I.P
         </Link>
       </div>
       <Search />
