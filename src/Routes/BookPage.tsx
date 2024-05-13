@@ -18,7 +18,6 @@ export const BookPage = () => {
 
   const favClicked = (favAction: string) => {
     setIsFav(!isFav);
-    console.log("Bookdata: ", bookData);
     const favBookInfo = {
       title: bookData.title,
       cover: bookData.covers ? bookData.covers[0] : null,

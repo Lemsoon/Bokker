@@ -7,10 +7,6 @@ export const SearchPage = () => {
   const { searchTerm } = useContext(BookContext);
   const searchResult = useFetch(`https://openlibrary.org/search.json?title=${searchTerm}&limit=10`);
 
-  useEffect(() => {
-    console.log("Search Results: ", searchResult);
-  }, [searchResult]);
-
   return (
     <div className="border-2 border-black w-[100%]">
       {searchResult ? (
