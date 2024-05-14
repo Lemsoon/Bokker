@@ -1,5 +1,7 @@
 import { ReactNode, useEffect, useReducer, useState } from "react";
 import { BookContext, BookType } from "./BookContext";
+import { FavoriteBooks } from "@/Routes/FavoriteBooks";
+import { stat } from "fs";
 
 type ContextProps = {
   children: ReactNode;
@@ -9,8 +11,8 @@ export type Action = {
   type: string;
   payload: {
     i: number;
-    review?: string;
-    rating?: number;
+    givenReview?: string;
+    givenRating?: number;
     key?: string;
     pages?: number;
   };
@@ -40,20 +42,22 @@ const reducer = (state: any, action: Action) => {
           book.key === action.payload.key ? { ...book, read: false } : book
         ),
       };
-    case "setReview":
-      return {
-        favoriteBooks: state.favoriteBooks.map((book: BookType) => ({
-          ...book,
-          givenReview: action.payload.review,
-          givenRating: action.payload.rating,
-        })),
-      };
     case "addPages":
       console.log("adding pages");
 
       return {
         favoriteBooks: state.favoriteBooks.map((book: BookType) =>
           book.key === action.payload.key ? { ...book, pages: action.payload.pages } : book
+        ),
+      };
+    case "addReview":
+      console.log("adding review");
+      console.log("dasdsa", state.favoriteBooks[action.payload.i]);
+      return {
+        favoriteBooks: state.favoriteBooks.map((book: BookType) =>
+          book.key === action.payload.key && book.read === true
+            ? { ...book, givenReview: action.payload.givenReview, givenRating: action.payload.givenRating }
+            : book
         ),
       };
     default:
