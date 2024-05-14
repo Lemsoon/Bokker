@@ -1,11 +1,12 @@
 import { BookContext, BookType } from "@/context/BookContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ToggleFavCategory } from "@/components/ToggleFavCategory";
 import { ShowFavorites, ShowRead } from "@/components/FavPageFilterToggle";
 
 export const FavoriteBooks = () => {
   const { state, dispatch } = useContext(BookContext);
   const [showFav, setShowFav] = useState<boolean>(true);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   const toggleReadStatus = (book: BookType) => {
     dispatch({
@@ -13,6 +14,15 @@ export const FavoriteBooks = () => {
       payload: { key: book.key },
     });
   };
+
+  useEffect(() => {
+    let totalPageCount = 0;
+    state.favoriteBooks.forEach((book) => {
+      console.log(book.pages);
+      totalPageCount += parseInt(book.pages);
+    });
+    setTotalPages(totalPageCount);
+  }, [state.favoriteBooks]);
 
   return (
     <div className="w-full h-full border-2 border-black overflow-y-scroll overflow-hidden">
@@ -23,16 +33,20 @@ export const FavoriteBooks = () => {
           </button>
         </div>
 
-        <h2 className="ml-2 mt-2 ">{state.favoriteBooks.length} Favorite(s)</h2>
+        <div className="ml-2 mt-2 ">
+          <h2>{state.favoriteBooks && state.favoriteBooks.length} Favorite(s)</h2>
+          <p>{totalPages} Pages read</p>
+        </div>
       </div>
       <div className="flex flex-wrap">
-        {state.favoriteBooks.map((book: BookType, i: number) =>
-          showFav ? (
-            <ShowFavorites book={book} i={i} toggleReadStatus={toggleReadStatus} />
-          ) : (
-            <ShowRead book={book} i={i} toggleReadStatus={toggleReadStatus} />
-          )
-        )}
+        {state.favoriteBooks &&
+          state.favoriteBooks.map((book: BookType, i: number) =>
+            showFav ? (
+              <ShowFavorites book={book} i={i} toggleReadStatus={toggleReadStatus} />
+            ) : (
+              <ShowRead book={book} i={i} toggleReadStatus={toggleReadStatus} />
+            )
+          )}
       </div>
     </div>
   );

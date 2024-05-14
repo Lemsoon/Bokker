@@ -28,7 +28,7 @@ export const BookPage = () => {
   };
 
   useEffect(() => {
-    setIsFav(bookData && state.favoriteBooks.some((book) => book.key.includes(bookData.key)));
+    setIsFav(bookData && state.favoriteBooks && state.favoriteBooks.some((book) => book.key.includes(bookData.key)));
   }, [authorKey]);
 
   return (
@@ -50,7 +50,7 @@ export const BookPage = () => {
                 <strong>Written by:</strong> {authorData ? authorData.name : <>Missing Author</>}
               </h2>
               <h3 className="text-xs">
-                <strong>Average Rating:</strong>{" "}
+                <strong>Average Rating:</strong>
                 {ratingData.summary.average ? ratingData.summary.average.toFixed(1) : <>No rating data to show</>}
               </h3>
             </div>
@@ -70,39 +70,49 @@ export const BookPage = () => {
             <div>
               <h1 className="font-bold text-2xl m-0 underline">Excerpts</h1>
               <div className="m-0">
-                {bookData.excerpts ? (
+                {bookData.excerpts && (
                   <ul>
                     {bookData.excerpts.map((e: any, i: number) => (
                       <li key={i} className="mb-2">
-                        {e.comment ? (
+                        {e.comment && (
                           <div id="excerpt-type" className=" font-bold">
                             {e.comment.charAt(0).toUpperCase() + e.comment.slice(1)}
                           </div>
-                        ) : (
-                          <></>
                         )}
                         <p>{e.excerpt}</p>
                       </li>
                     ))}
                   </ul>
-                ) : (
-                  <>No excerpts</>
                 )}
               </div>
+            </div>
+            <div>
+              {isFav ? (
+                <button
+                  className="border-2 border-black bg-red-200 hover:bg-red-500"
+                  onClick={() => {
+                    favClicked(isFav ? "removeFromFav" : "addToFav");
+                  }}
+                >
+                  Remove from favorites
+                </button>
+              ) : (
+                <button
+                  className="border-2 border-black bg-red-200 hover:bg-red-500"
+                  onClick={() => {
+                    favClicked(isFav ? "removeFromFav" : "addToFav");
+                  }}
+                >
+                  Add to favorites
+                </button>
+              )}
             </div>
           </div>
         </div>
       ) : (
         "Data loading..."
       )}
-      <button
-        className="border-2 border-black bg-red-200 hover:bg-red-500"
-        onClick={() => {
-          favClicked(isFav ? "removeFromFav" : "addToFav");
-        }}
-      >
-        {isFav ? "Remove from favorites" : "Add to favorites"}
-      </button>
+      {/* <Review data={bookData} /> */}
     </div>
   );
 };

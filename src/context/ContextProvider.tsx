@@ -5,19 +5,27 @@ type ContextProps = {
   children: ReactNode;
 };
 
-type Action = {
+export type Action = {
   type: string;
-  payload: { key: string };
+  payload: {
+    i: number;
+    review?: string;
+    rating?: number;
+    key?: string;
+    pages?: number;
+  };
 };
 
 const reducer = (state: any, action: Action) => {
   switch (action.type) {
     case "addToFav":
       return {
+        ...state,
         favoriteBooks: [...state.favoriteBooks, action.payload],
       };
     case "removeFromFav":
       return {
+        ...state,
         favoriteBooks: state.favoriteBooks.filter((book: any) => book.key !== action.payload.key),
       };
     case "setRead":
@@ -30,6 +38,22 @@ const reducer = (state: any, action: Action) => {
       return {
         favoriteBooks: state.favoriteBooks.map((book: any) =>
           book.key === action.payload.key ? { ...book, read: false } : book
+        ),
+      };
+    case "setReview":
+      return {
+        favoriteBooks: state.favoriteBooks.map((book: BookType) => ({
+          ...book,
+          givenReview: action.payload.review,
+          givenRating: action.payload.rating,
+        })),
+      };
+    case "addPages":
+      console.log("adding pages");
+
+      return {
+        favoriteBooks: state.favoriteBooks.map((book: BookType) =>
+          book.key === action.payload.key ? { ...book, pages: action.payload.pages } : book
         ),
       };
     default:

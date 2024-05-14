@@ -1,11 +1,14 @@
 import { createContext } from "react";
 
 export type BookType = {
+  pages: number;
   title: string;
-  key: string[];
+  key: string;
   cover?: string;
   author: string;
   read: boolean;
+  givenReview?: string;
+  givenRating?: number;
 };
 
 export type favoriteBooksType = {

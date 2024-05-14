@@ -8,19 +8,20 @@ export const Sidebar = () => {
   return (
     <div className=" overflow-hidden h-[80vh]">
       <h1 className="text-4xl underline text-center tracking-[.3rem]">Your Favorites</h1>
-      {state.favoriteBooks.length === 0 ? (
+      {state.favoriteBooks && state.favoriteBooks.length === 0 ? (
         <p className="font-l italic tracking-widest text-center pt-3">You have not added any favorite books yet</p>
       ) : (
         <ul className="text-center duration-200">
-          {state.favoriteBooks.map((book, i) => {
-            return (
-              <Link key={i} to={`/book${book.key}`}>
-                <li className="h-auto  bg-red-100 m-2 border-2 border-black hover:scale-[104%] duration-75">
-                  <p className="py-1">{book.title}</p>
-                </li>
-              </Link>
-            );
-          })}
+          {state.favoriteBooks &&
+            state.favoriteBooks.map((book, i) => {
+              return (
+                <Link key={i} to={`/book${book.key}`}>
+                  <li className="h-auto  bg-red-100 m-2 border-2 border-black hover:scale-[104%] duration-75">
+                    <p className="py-1">{book.title}</p>
+                  </li>
+                </Link>
+              );
+            })}
         </ul>
       )}
     </div>
