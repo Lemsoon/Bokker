@@ -6,12 +6,8 @@ export const useFetch = (apiUrl: string) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get(apiUrl);
-        setResult(response.data);
-      } catch (error) {
-        console.error("Error with fetching...", error);
-      }
+      const response = await axios.get(apiUrl);
+      setResult(response.data);
     };
 
     fetchData();

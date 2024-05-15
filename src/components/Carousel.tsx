@@ -12,7 +12,7 @@ type CarouselProps = {
 
 export const Carousel = ({ inputArray, loadingText, jumpAmount, instantScroll }: CarouselProps) => {
   const windowRef = useRef<HTMLDivElement>(null);
-  const { setCurrentBook, currentBook } = useContext(BookContext);
+  const { setCurrentBook } = useContext(BookContext);
 
   return (
     <div className="h-full flex justify-center items-center relative">

@@ -46,7 +46,7 @@ export const BookPage = () => {
               <div id="title_&_author_rating">
                 <h1 className="font-bold text-3xl">
                   {bookData.title}
-                  {bookData.subtitle ? ": " + bookData.subtitle : ""}
+                  {bookData.subtitle && ": " + bookData.subtitle}
                 </h1>
                 <h2>
                   <strong>Written by:</strong> {authorData ? authorData.name : <>Missing Author</>}

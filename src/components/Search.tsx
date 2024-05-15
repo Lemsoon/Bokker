@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Input } from "./Input";
 import { BookContext } from "../context/BookContext";
 import { Link, redirect } from "react-router-dom";
@@ -6,7 +6,7 @@ import { Link, redirect } from "react-router-dom";
 export const Search = () => {
   const [activeSearchMode, setActiveSearchMode] = useState<boolean>(true);
   const toggleSearchMode = (searchMode: boolean) => setActiveSearchMode(searchMode);
-  const { setSearchTerm, searchTerm } = useContext(BookContext);
+  const { setSearchTerm } = useContext(BookContext);
   const searchTermRef = useRef<HTMLInputElement>(null);
 
   const doSearch = () => {

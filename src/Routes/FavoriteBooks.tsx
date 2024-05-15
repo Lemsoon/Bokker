@@ -19,7 +19,7 @@ export const FavoriteBooks = () => {
     let totalPageCount = 0;
     state.favoriteBooks.forEach((book) => {
       console.log(book.pages);
-      totalPageCount += parseInt(book.pages);
+      totalPageCount += +book.pages;
     });
     setTotalPages(totalPageCount);
   }, [state.favoriteBooks]);

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { NotRead, Read } from "./ReadToggle";
 import { favPageProp } from "./FavPageFilterToggle";
-import { useContext, useRef, useEffect } from "react";
+import { useContext, useRef } from "react";
 import { BookContext } from "@/context/BookContext";
 
 const FavPageBookCard: React.FC<favPageProp> = ({ i, book, toggleReadStatus }) => {

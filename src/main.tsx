@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { Root } from "./Routes/Root.tsx";
 import "./index.css";
