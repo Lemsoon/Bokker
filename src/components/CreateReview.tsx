@@ -46,8 +46,8 @@ export const Review: React.FC<reviewProp> = ({ data }) => {
               className="border-[1px] border-black"
               placeholder="0"
               onChange={() => {
-                if (parseInt(ratingRef.current!.value) > 5) {
-                  ratingRef.current?.value = 5;
+                if (ratingRef.current && parseInt(ratingRef.current.value) > 5) {
+                  ratingRef.current.value = "5";
                 }
               }}
               ref={ratingRef}
