@@ -19,7 +19,7 @@ const FavPageBookCard: React.FC<favPageProp> = ({ i, book, toggleReadStatus }) =
       <div className="flex">
         <img src={`https://covers.openlibrary.org/b/id/${book.cover}.jpg`} alt="cover image" className="w-10" />
         <div id="book-title-&-author" className="font-bold text-2xl ml-2">
-          <Link to={`/book${book.key}`}>
+          <Link to={`${book.key}`}>
             <h1>{book.title}</h1>
           </Link>
           <Link to="">
@@ -44,7 +44,7 @@ const FavPageBookCard: React.FC<favPageProp> = ({ i, book, toggleReadStatus }) =
               onChange={addPages}
             />
             <Link
-              to={`/book${book.key}`}
+              to={`${book.key}`}
               className="mr-2 w-auto p-1 h-10 rounded-sm border-2 border-black text-black hover:bg-black hover:bg-opacity-25 duration-75"
             >
               Review

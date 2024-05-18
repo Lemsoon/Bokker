@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         errorElement: <>Error loading Search Page</>,
       },
       {
-        path: `/book/works/:bookId`,
+        path: `/works/:bookId`,
         element: <BookPage />,
         errorElement: <>Error loading book page</>,
       },

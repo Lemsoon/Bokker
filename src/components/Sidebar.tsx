@@ -15,7 +15,7 @@ export const Sidebar = () => {
           {state.favoriteBooks &&
             state.favoriteBooks.map((book, i) => {
               return (
-                <Link key={i} to={`/book${book.key}`}>
+                <Link key={i} to={`${book.key}`}>
                   <li className="h-auto  bg-red-100 m-2 border-2 border-black hover:scale-[104%] duration-75">
                     <p className="py-1">{book.title}</p>
                   </li>

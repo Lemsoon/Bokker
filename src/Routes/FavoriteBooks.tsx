@@ -17,9 +17,12 @@ export const FavoriteBooks = () => {
 
   useEffect(() => {
     let totalPageCount = 0;
-    state.favoriteBooks.forEach((book) => {
+    const readBooks = state.favoriteBooks.filter((book) => {
+      return book.read;
+    });
+    readBooks.forEach((book) => {
       console.log(book.pages);
-      totalPageCount += +book.pages;
+      totalPageCount += book.pages ? +book.pages : 0;
     });
     setTotalPages(totalPageCount);
   }, [state.favoriteBooks]);

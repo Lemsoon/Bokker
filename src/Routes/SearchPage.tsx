@@ -11,7 +11,7 @@ export const SearchPage = () => {
     <div className="border-2 border-black w-[100%]">
       {searchResult ? (
         searchResult.docs.map((book: any) => (
-          <Link key={book.key} to={`/book${book.key}`}>
+          <Link key={book.key} to={`${book.key}`}>
             <div
               id="book-result-container"
               className=" border-2 border-black m-6 flex min-h-60 hover:scale-[1.01] duration-100 cursor-pointer"
