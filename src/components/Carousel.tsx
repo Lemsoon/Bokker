@@ -1,5 +1,4 @@
-import { BookContext } from "@/context/BookContext";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
@@ -12,7 +11,6 @@ type CarouselProps = {
 
 export const Carousel = ({ inputArray, loadingText, jumpAmount, instantScroll }: CarouselProps) => {
   const windowRef = useRef<HTMLDivElement>(null);
-  const { setCurrentBook } = useContext(BookContext);
 
   return (
     <div className="h-full flex justify-center items-center relative">
@@ -50,12 +48,7 @@ export const Carousel = ({ inputArray, loadingText, jumpAmount, instantScroll }:
                   className="max-h-[22rem] min-h-[22rem] min-w-56 border-2 border-black"
                 />
                 <div className="text-center cursor-pointer absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center duration-200">
-                  <Link
-                    to={`${book.key}`}
-                    onClick={() => {
-                      setCurrentBook(book.key);
-                    }}
-                  >
+                  <Link to={`${book.key}`}>
                     <p className="text-white text-lg">{book.title}</p>
                   </Link>
                 </div>

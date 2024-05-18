@@ -1,8 +1,9 @@
 import { Review } from "@/components/CreateReview";
 import { BookContext } from "@/context/BookContext";
 import { useFetch } from "@/hooks/useFetch";
+import { bookType } from "@/types/types";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const BookPage = () => {
   const { dispatch, state } = useContext(BookContext);
@@ -10,9 +11,10 @@ export const BookPage = () => {
   const params = useParams();
   const bookId = params.bookId;
 
-  const bookData = useFetch(`https://openlibrary.org/works/${bookId}.json`);
+  const bookData: bookType = useFetch(`https://openlibrary.org/works/${bookId}.json`);
+
   const ratingData = useFetch(`https://openlibrary.org/works/${bookId}/ratings.json`);
-  const authorKey = bookData && bookData.authors[0].author.key;
+  const authorKey = bookData && bookData.authors![0].author.key;
   const authorData = useFetch(`https://openlibrary.org${authorKey}.json`);
 
   const [isFav, setIsFav] = useState<boolean>();
@@ -24,6 +26,7 @@ export const BookPage = () => {
       cover: bookData.covers ? bookData.covers[0] : null,
       key: bookData.key,
       author: authorData.name,
+      authorKey: authorKey, //I added this authorKey now, where else may I need to change this so that it will work everywhere?
     };
     dispatch({ type: favAction, payload: favBookInfo });
   };
@@ -38,7 +41,7 @@ export const BookPage = () => {
         <>
           <div className="flex">
             <img
-              src={bookData.covers ? `https://covers.openlibrary.org/b/id/${bookData.covers[0]}-M.jpg` : ""}
+              src={bookData.covers && `https://covers.openlibrary.org/b/id/${bookData.covers[0]}-M.jpg`}
               alt={`Cover image for: ${bookData.title} is missing`}
               className="min-w-72 max-w-72 h-full border-2 border-black"
             />
@@ -48,9 +51,12 @@ export const BookPage = () => {
                   {bookData.title}
                   {bookData.subtitle && ": " + bookData.subtitle}
                 </h1>
-                <h2>
-                  <strong>Written by:</strong> {authorData ? authorData.name : <>Missing Author</>}
-                </h2>
+                <Link to={`${authorKey}`}>
+                  <h2>
+                    <strong>Written by:</strong> {authorData ? authorData.name : <>Missing Author</>}
+                  </h2>
+                </Link>
+
                 <h3 className="text-xs">
                   <strong>Average Rating:</strong>
                   {ratingData.summary.average ? ratingData.summary.average.toFixed(1) : <>No rating data to show</>}
@@ -59,13 +65,13 @@ export const BookPage = () => {
               <div>
                 <h1 className="font-bold text-2xl m-0 underline">About this book</h1>
                 {bookData.description ? (
-                  bookData.description.value ? (
-                    bookData.description.value
-                  ) : (
+                  typeof bookData.description === "string" ? (
                     bookData.description
+                  ) : (
+                    bookData.description.value
                   )
                 ) : (
-                  <>This book has no description</>
+                  <>There is no description for this book</>
                 )}
               </div>
 

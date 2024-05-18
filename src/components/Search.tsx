@@ -1,31 +1,34 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Input } from "./Input";
 import { BookContext } from "../context/BookContext";
 import { Link, redirect } from "react-router-dom";
 
 export const Search = () => {
-  const [activeSearchMode, setActiveSearchMode] = useState<boolean>(true);
+  const [bookSearch, setActiveSearchMode] = useState<boolean>(true);
   const toggleSearchMode = (searchMode: boolean) => setActiveSearchMode(searchMode);
   const { setSearchTerm } = useContext(BookContext);
   const searchTermRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    console.log(bookSearch);
+  }, [bookSearch]);
+
   const doSearch = () => {
     if (!searchTermRef) return;
     setSearchTerm(searchTermRef.current?.value!);
-    redirect("/search");
   };
 
   return (
     <div className="w-96 mr-16">
       <button
         onClick={() => toggleSearchMode(true)}
-        className={activeSearchMode ? "border-black border-2 w-16" : " border-none w-16"}
+        className={bookSearch ? "border-black border-2 w-16" : " border-none w-16"}
       >
         Book
       </button>
       <button
         onClick={() => toggleSearchMode(false)}
-        className={activeSearchMode ? "border-none w-16 " : "border-black border-2 w-16"}
+        className={bookSearch ? "border-none w-16 " : "border-black border-2 w-16"}
       >
         Author
       </button>
@@ -37,7 +40,7 @@ export const Search = () => {
           ref={searchTermRef}
         />
         <button className="border-2 border-black" onClick={() => doSearch()}>
-          <Link to="/search">search</Link>
+          <Link to={`/search/${bookSearch ? "" : "author"}`}>search</Link>
         </button>
       </div>
     </div>

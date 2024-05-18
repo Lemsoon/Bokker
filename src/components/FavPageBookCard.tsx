@@ -13,6 +13,7 @@ const FavPageBookCard: React.FC<favPageProp> = ({ i, book, toggleReadStatus }) =
       dispatch({ type: "addPages", payload: { i: i, pages: pageRef.current.value, key: book.key } });
     }
   };
+  console.log(book);
 
   return (
     <div key={i} id="book-container" className="w-[48%] h-auto border-2 border-black m-2 flex justify-between">
@@ -22,7 +23,7 @@ const FavPageBookCard: React.FC<favPageProp> = ({ i, book, toggleReadStatus }) =
           <Link to={`${book.key}`}>
             <h1>{book.title}</h1>
           </Link>
-          <Link to="">
+          <Link to={`${book.authorKey}`}>
             <h2 className="text-sm font-normal">
               Written by: <span className="underline">{book.author}</span>
             </h2>
@@ -51,7 +52,7 @@ const FavPageBookCard: React.FC<favPageProp> = ({ i, book, toggleReadStatus }) =
             </Link>
           </>
         )}
-        <button onClick={() => toggleReadStatus(book)}>{book.read ? <Read /> : <NotRead />}</button>
+        <div onClick={() => toggleReadStatus(book)}>{book.read ? <Read /> : <NotRead />}</div>
       </div>
     </div>
   );

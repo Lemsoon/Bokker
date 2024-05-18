@@ -62,7 +62,7 @@ export const Header = () => {
           FAVORITE BOOKS
         </Link>
         <Link to="/favorite_authors" className="hover:scale-110 duration-150">
-          FAVORITE AUTHORS W.I.P
+          FAVORITE AUTHORS
         </Link>
       </div>
       <Search />

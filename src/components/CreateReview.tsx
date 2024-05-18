@@ -21,12 +21,7 @@ export const Review: React.FC<reviewProp> = ({ data }) => {
     }
   };
 
-  useEffect(() => {
-    console.log(state.favoriteBooks);
-  }, [state.favoriteBooks]);
-
   const thisBook = state.favoriteBooks.find((key) => key.key === data.key);
-  console.log(thisBook?.givenReview);
 
   return (
     <div className="w-full h-96 border-2 border-black mt-4 flex">

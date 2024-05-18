@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import { BookContext } from "@/context/BookContext";
-import { useFetch } from "@/hooks/useFetch";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export const SearchPage = () => {
-  const { searchTerm } = useContext(BookContext);
-  const searchResult = useFetch(`https://openlibrary.org/search.json?title=${searchTerm}&limit=10`);
+type prop = {
+  searchResult: {
+    docs: [];
+  };
+};
 
-  console.log(searchResult);
+export const SearchResultsPage: React.FC<prop> = ({ searchResult }) => {
   return (
     <div className="border-2 border-black w-[100%]">
       {searchResult ? (
@@ -24,11 +24,11 @@ export const SearchPage = () => {
                 alt="Book cover"
                 className="w-44 object-contain"
               />
-              <div>
-                <h1 className="font-bold text-3xl ml-2 mt-2">{book.title}</h1>
-                <h2 className="text-l ml-2 mt-2">
+              <div className="ml-2">
+                <h1 className="font-bold text-3xl  mt-2">{book.title}</h1>
+                <h2 className="text-l  mt-2">
                   Written by:
-                  <Link to={`/authors/${book.author_key}`} className="font-bold">
+                  <Link to={`/authors/${book.author_key}`} className="font-bold hover:text-blue-300">
                     {book.author_name}
                   </Link>
                 </h2>

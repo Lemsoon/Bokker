@@ -1,4 +1,4 @@
-import { BookType } from "@/context/BookContext";
+import { BookType } from "@/types/types";
 import FavpageBookCard from "./FavPageBookCard";
 
 export type favPageProp = {
