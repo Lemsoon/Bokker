@@ -34,7 +34,7 @@ export const AuthorPage = () => {
     console.log(state.favoriteAuthors);
     const ifFav = state.favoriteAuthors.some((key) => key.key === params.authorId);
     setIsFav(ifFav);
-  }, []);
+  }, [state.favoriteAuthors, params.authorId]);
 
   return author ? (
     <div className="w-full h-full border-2 border-black p-4">
