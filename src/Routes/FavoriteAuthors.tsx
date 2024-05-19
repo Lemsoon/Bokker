@@ -4,13 +4,15 @@ import { Link } from "react-router-dom";
 
 export const FavoriteAuthors = () => {
   const { state } = useContext(BookContext);
+  let authorNameWords = [];
+  {
+    state.favoriteAuthors &&
+      (authorNameWords = state.favoriteAuthors.flatMap((author) => {
+        return author.name.split(/[,. ]+/);
+      }));
+  }
 
-  const authorNameWords = state.favoriteAuthors.flatMap((author) => {
-    return author.name.split(/[,. ]+/);
-  });
-  console.log(state.favoriteAuthors.length, "/", authorNameWords.length);
-
-  return state.favoriteAuthors.length > 0 ? (
+  return state.favoriteAuthors && state.favoriteAuthors.length > 0 ? (
     <div className="w-full h-full border-2 border-black overflow-y-scroll overflow-hidden">
       <header className="border-b-2 border-black bg-black bg-opacity-10 h-24">
         <div className="ml-2">

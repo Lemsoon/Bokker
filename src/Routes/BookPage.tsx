@@ -26,7 +26,7 @@ export const BookPage = () => {
       cover: bookData.covers ? bookData.covers[0] : null,
       key: bookData.key,
       author: authorData.name,
-      authorKey: authorKey, //I added this authorKey now, where else may I need to change this so that it will work everywhere?
+      authorKey: authorKey,
     };
     dispatch({ type: favAction, payload: favBookInfo });
   };
@@ -45,15 +45,16 @@ export const BookPage = () => {
               alt={`Cover image for: ${bookData.title} is missing`}
               className="min-w-72 max-w-72 h-full border-2 border-black"
             />
-            <div id="left-side" className="ml-6 flex flex-col gap-5 border-2 border-black p-2 w-full">
-              <div id="title_&_author_rating">
+            <div className="ml-6 flex flex-col gap-5 border-2 border-black p-2 w-full">
+              <div>
                 <h1 className="font-bold text-3xl">
                   {bookData.title}
                   {bookData.subtitle && ": " + bookData.subtitle}
                 </h1>
                 <Link to={`${authorKey}`}>
                   <h2>
-                    <strong>Written by:</strong> {authorData ? authorData.name : <>Missing Author</>}
+                    <strong>Written by:</strong>{" "}
+                    {authorData ? <div className="underline inline">{authorData.name}</div> : <>Missing Author</>}
                   </h2>
                 </Link>
 
@@ -115,13 +116,11 @@ export const BookPage = () => {
                   </button>
                 )}
               </div>
+              {state.favoriteBooks.some((book) => book.key === bookData.key && book.read == true) && (
+                <Review data={bookData} />
+              )}
             </div>
           </div>
-          {state.favoriteBooks.some((book) => book.key === bookData.key && book.read == true) ? (
-            <Review data={bookData} />
-          ) : (
-            <></>
-          )}
         </>
       ) : (
         "Data loading..."

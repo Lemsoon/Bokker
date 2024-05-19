@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { GrDocumentMissing } from "react-icons/gr";
 import { IoIosStar } from "react-icons/io";
 import { BookContext } from "@/context/BookContext";
+import { stat } from "fs";
 
 export const AuthorPage = () => {
   const params = useParams();
@@ -13,6 +14,7 @@ export const AuthorPage = () => {
   const [isFav, setIsFav] = useState<boolean>(false);
   const { dispatch, state } = useContext(BookContext);
   const author: authorType = useFetch(`https://openlibrary.org/authors/${params.authorId}.json`);
+  let ifFav: boolean;
 
   useEffect(() => {
     const fetchAuthorWorks = async () => {
@@ -31,9 +33,10 @@ export const AuthorPage = () => {
   };
 
   useEffect(() => {
-    console.log(state.favoriteAuthors);
-    const ifFav = state.favoriteAuthors.some((key) => key.key === params.authorId);
-    setIsFav(ifFav);
+    if (state.favoriteAuthors) {
+      const ifFav = state.favoriteAuthors.some((author) => author.key === params.authorId);
+      setIsFav(ifFav);
+    }
   }, [state.favoriteAuthors, params.authorId]);
 
   return author ? (

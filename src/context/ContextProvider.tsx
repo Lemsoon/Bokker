@@ -20,24 +20,28 @@ const reducer = (state: any, action: Action) => {
       };
     case "setRead":
       return {
+        ...state,
         favoriteBooks: state.favoriteBooks.map((book: BookType) =>
           book.key === action.payload.key ? { ...book, read: true } : book
         ),
       };
     case "setNotRead":
       return {
+        ...state,
         favoriteBooks: state.favoriteBooks.map((book: BookType) =>
           book.key === action.payload.key ? { ...book, read: false } : book
         ),
       };
     case "addPages":
       return {
+        ...state,
         favoriteBooks: state.favoriteBooks.map((book: BookType) =>
           book.key === action.payload.key ? { ...book, pages: action.payload.pages } : book
         ),
       };
     case "addReview":
       return {
+        ...state,
         favoriteBooks: state.favoriteBooks.map((book: BookType) =>
           book.key === action.payload.key && book.read === true
             ? { ...book, givenReview: action.payload.givenReview, givenRating: action.payload.givenRating }
