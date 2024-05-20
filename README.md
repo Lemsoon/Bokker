@@ -26,8 +26,10 @@ Then run the project with [npm run dev]
 # **Created using:**
 React
 
+React Router
+
 TypeScript
 
 Tailwind
 
-A little bit of ShadCN
+Axios
