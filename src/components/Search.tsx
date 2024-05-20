@@ -1,7 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Input } from "./Input";
 import { BookContext } from "../context/BookContext";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { CiSearch } from "react-icons/ci";
 
 export const Search = () => {
   const [bookSearch, setActiveSearchMode] = useState<boolean>(true);
@@ -20,27 +21,31 @@ export const Search = () => {
 
   return (
     <div className="w-96 mr-16">
-      <button
-        onClick={() => toggleSearchMode(true)}
-        className={bookSearch ? "border-black border-2 w-16" : " border-none w-16"}
-      >
-        Book
-      </button>
-      <button
-        onClick={() => toggleSearchMode(false)}
-        className={bookSearch ? "border-none w-16 " : "border-black border-2 w-16"}
-      >
-        Author
-      </button>
+      <div className="flex gap-8 text-xl">
+        <button
+          onClick={() => toggleSearchMode(true)}
+          className={`${bookSearch ? "text-black font-bold underline underline-offset-1" : "text-gray-400"}`}
+        >
+          Book
+        </button>
+        <button
+          onClick={() => toggleSearchMode(false)}
+          className={` ${bookSearch ? "text-gray-400" : "text-black font-bold underline underline-offset-1"}`}
+        >
+          Author
+        </button>
+      </div>
 
-      <div className="flex ">
+      <div className="flex relative">
         <Input
           className=" h-12 border-black border-[.1rem] rounded-full bg-white text-[16px]"
-          placeholder="Search for a book..."
+          placeholder={bookSearch ? "Search for a book..." : "Search for an author..."}
           ref={searchTermRef}
         />
-        <button className="border-2 border-black" onClick={() => doSearch()}>
-          <Link to={`/search/${bookSearch ? "" : "author"}`}>search</Link>
+        <button className="scale-[200%] absolute right-4 top-4" onClick={() => doSearch()}>
+          <Link to={`/search/${bookSearch ? "" : "author"}`}>
+            <CiSearch />
+          </Link>
         </button>
       </div>
     </div>
