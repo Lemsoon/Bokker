@@ -2,6 +2,7 @@ import { Review } from "@/components/CreateReview";
 import { BookContext } from "@/context/BookContext";
 import { useFetch } from "@/hooks/useFetch";
 import { bookType } from "@/types/types";
+import { LimitNumber } from "@/utils/LimitNumber";
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -60,7 +61,11 @@ export const BookPage = () => {
 
                 <h3 className="text-xs">
                   <strong>Average Rating:</strong>
-                  {ratingData.summary.average ? ratingData.summary.average.toFixed(1) : <>No rating data to show</>}
+                  {ratingData.summary.average ? (
+                    LimitNumber(ratingData.summary.average, 1)
+                  ) : (
+                    <>No rating data to show</>
+                  )}
                 </h3>
               </div>
               <div>

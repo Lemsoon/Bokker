@@ -4,6 +4,7 @@ import { ToggleFavCategory } from "@/components/ToggleFavCategory";
 import { ShowFavorites, ShowRead } from "@/components/FavPageFilterToggle";
 import { BookType } from "@/types/types";
 import { stat } from "fs";
+import { LimitNumber } from "@/utils/LimitNumber";
 
 export const FavoriteBooks = () => {
   const { state, dispatch } = useContext(BookContext);
@@ -46,11 +47,12 @@ export const FavoriteBooks = () => {
           </div>
           <div className="w-96">
             <h2>
-              Your books are <strong>{totalPages ? (totalPages / state.favoriteBooks.length).toFixed(2) : "0"}</strong>{" "}
-              pages long on average
+              Your books are
+              <strong>{totalPages ? LimitNumber(totalPages / state.favoriteBooks.length, 2) : "0"}</strong> pages long
+              on average
             </h2>
             <p>
-              You have read {(totalRead / 129864880).toFixed(10)}% of <span className="italic font-bold">ALL</span>{" "}
+              You have read {LimitNumber(totalRead / 129864880, 10)}% of <span className="italic font-bold">ALL</span>{" "}
               books
             </p>
             {/* https://searchengineland.com/how-many-books-are-there-google-knows-48244#:~:text=in%20the%20world%3F-,The%20answer%3A%20129%2C864%2C880%20books.,settlement%20in%20a%20separate%20lawsuit. */}

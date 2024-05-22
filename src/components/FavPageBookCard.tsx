@@ -10,7 +10,7 @@ const FavPageBookCard: React.FC<favPageProp> = ({ i, book, toggleReadStatus }) =
 
   const addPages = () => {
     if (pageRef.current) {
-      dispatch({ type: "addPages", payload: { i: i, pages: pageRef.current.value, key: book.key } });
+      dispatch({ type: "addPages", payload: { pages: pageRef.current.value, key: book.key } });
     }
   };
   console.log(book);
